@@ -1,0 +1,26 @@
+version: '3.7'
+
+networks: 
+  appnet:
+    external: true
+
+services:
+  nodered:
+    image: nodered
+    build: ../image-nodered
+#    volumes:
+#      - .data/nodered:/data
+    networks:
+      - appnet
+    ports:
+      - "1880:1880"
+    configs:
+      - source: nodered_conf
+        target: /data/settings.js
+#        uid: node-red
+#        gid: node-red
+configs:
+  nodered_conf:
+    external: true
+
+
